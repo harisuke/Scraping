@@ -11,4 +11,3 @@ soup = BeautifulSoup(res, "html.parser")
 # 任意のデータを抽出 --- (※1)
 price = soup.select_one(".stoksPrice").string
 print("usd/jpy=", price)
-

@@ -8,4 +8,3 @@ savename = "test.png"
 # ダウンロード --- (※2)
 urllib.request.urlretrieve(url, savename)
 print("保存しました")
-

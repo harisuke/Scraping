@@ -1,4 +1,4 @@
-import openpyxl 
+import openpyxl
 
 # Excelファイルを開く --- (※1)
 filename = "population.xlsx"
@@ -19,10 +19,9 @@ for row in sheet.rows:
 del data[0]
 
 # データを人口順に並び替える
-data = sorted(data, key=lambda x:x[1])
+data = sorted(data, key=lambda x: x[1])
 
 # ワースト5を表示
 for i, a in enumerate(data):
     if (i >= 5): break
-    print(i+1, a[0], int(a[1]))
-
+    print(i + 1, a[0], int(a[1]))

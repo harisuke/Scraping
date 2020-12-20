@@ -1,4 +1,4 @@
-from bs4 import BeautifulSoup 
+from bs4 import BeautifulSoup
 
 html = """
 <html><body>
@@ -19,6 +19,4 @@ links = soup.find_all("a")
 for a in links:
     href = a.attrs['href']
     text = a.string
-    print(text, ">", href) 
-
-
+    print(text, ">", href)

@@ -1,9 +1,10 @@
 import scrapy
 
+
 class Soseki2Spider(scrapy.Spider):
     name = 'soseki2'
     start_urls = [
-      'https://www.aozora.gr.jp/index_pages/person148.html'
+        'https://www.aozora.gr.jp/index_pages/person148.html'
     ]
 
     def parse(self, response):
@@ -20,4 +21,3 @@ class Soseki2Spider(scrapy.Spider):
                 'text': text,
                 'url': href2
             }
-

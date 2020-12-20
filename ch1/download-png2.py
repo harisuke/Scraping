@@ -1,4 +1,4 @@
-import urllib.request 
+import urllib.request
 
 # URLと保存パスを指定
 url = "https://uta.pw/shodou/img/28/214.png"
@@ -11,4 +11,3 @@ mem = urllib.request.urlopen(url).read()
 with open(savename, mode="wb") as f:
     f.write(mem)
     print("保存しました")
-

@@ -8,7 +8,7 @@ def check_freq(fname):
     lang = re.match(r'^[a-z]{2,}', name).group()
     with open(fname, "r", encoding="utf-8") as f:
         text = f.read()
-    text = text.lower() # 小文字に変換
+    text = text.lower()  # 小文字に変換
     # カウンタを0に
     cnt = [0 for n in range(0, 26)]
     code_a = ord("a")
@@ -16,13 +16,14 @@ def check_freq(fname):
     # アルファベットの出現回数を調べる --- (※2)
     for ch in text:
         n = ord(ch)
-        if code_a <= n <= code_z: # a-zの間なら
+        if code_a <= n <= code_z:  # a-zの間なら
             cnt[n - code_a] += 1
     # 正規化する --- (※3)
     total = sum(cnt)
     freq = list(map(lambda n: n / total, cnt))
     return (freq, lang)
-    
+
+
 # 各ファイルを処理する
 def load_files(path):
     freqs = []
@@ -32,8 +33,9 @@ def load_files(path):
         r = check_freq(fname)
         freqs.append(r[0])
         labels.append(r[1])
-    return {"freqs":freqs, "labels":labels}
-    
+    return {"freqs": freqs, "labels": labels}
+
+
 data = load_files("./lang/train/*.txt")
 test = load_files("./lang/test/*.txt")
 # 今後のためにJSONで結果を保存
@@ -53,4 +55,3 @@ cl_report = metrics.classification_report(test["labels"], predict)
 print("正解率=", ac_score)
 print("レポート=")
 print(cl_report)
-

@@ -10,4 +10,3 @@ price = {
 
 s = json.dumps(price)
 print(s)
-

@@ -13,5 +13,3 @@ tw = tf.summary.FileWriter("log_dir", graph=sess.graph)
 
 # セッションを実行する --- (*4)
 print(sess.run(mul_op))
-
-

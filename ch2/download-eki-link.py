@@ -24,4 +24,3 @@ for title, url in result:
     # ここでダウンロードを行う
     # urlretrieve(a_url, path)
     time.sleep(1)
-

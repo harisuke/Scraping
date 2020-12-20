@@ -33,5 +33,3 @@ ac_score = metrics.accuracy_score(label_test, predict)
 cl_report = metrics.classification_report(label_test, predict)
 print("正解率=", ac_score)
 print("レポート=\n", cl_report)
-
-

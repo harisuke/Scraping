@@ -15,10 +15,9 @@ contours = cv2.findContours(
 
 # 抽出した領域を繰り返し処理する --- (※4)
 for cnt in contours:
-    x, y, w, h = cv2.boundingRect(cnt) # --- (※5)
-    if h < 20: continue # 小さすぎるのは飛ばす
+    x, y, w, h = cv2.boundingRect(cnt)  # --- (※5)
+    if h < 20: continue  # 小さすぎるのは飛ばす
     red = (0, 0, 255)
-    cv2.rectangle(im, (x, y), (x+w, y+h), red, 2)
+    cv2.rectangle(im, (x, y), (x + w, y + h), red, 2)
 
 cv2.imwrite('numbers-cnt.png', im)
-

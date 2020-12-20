@@ -16,5 +16,4 @@ sess = tf.Session()
 sess.run(assign_op)
 
 # vの内容を表示する --- (※5)
-print( sess.run(v) )
-
+print(sess.run(v))

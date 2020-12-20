@@ -6,7 +6,7 @@ conn = sqlite3.connect(filepath)
 
 # テーブルを作成 --- (※2)
 cur = conn.cursor()
-cur.execute("DROP TABLE IF EXISTS items") 
+cur.execute("DROP TABLE IF EXISTS items")
 cur.execute(""" CREATE TABLE items (
     item_id INTEGER PRIMARY KEY,
     name    TEXT,
@@ -22,8 +22,8 @@ conn.commit()
 
 # 連続でデータを挿入 --- (※4)
 cur = conn.cursor()
-data = [("Mango",770), ("Kiwi",400), ("Grape",800),
-    ("Peach",940),("Persimmon",700),("Banana", 400)]
+data = [("Mango", 770), ("Kiwi", 400), ("Grape", 800),
+        ("Peach", 940), ("Persimmon", 700), ("Banana", 400)]
 cur.executemany(
     "INSERT INTO items(name,price) VALUES (?,?)",
     data)
@@ -38,4 +38,3 @@ cur.execute(
 fr_list = cur.fetchall()
 for fr in fr_list:
     print(fr)
-

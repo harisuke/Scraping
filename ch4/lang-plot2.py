@@ -17,11 +17,10 @@ for i, lbl in enumerate(freq[0]["labels"]):
         lang_dic[lbl][idx] = (lang_dic[lbl][idx] + v) / 2
 
 # PandasのDataFrameにデータを入れる --- (※3)
-asclist = [[chr(n) for n in range(97,97+26)]]
+asclist = [[chr(n) for n in range(97, 97 + 26)]]
 df = pd.DataFrame(lang_dic, index=asclist)
 
 # プロット --- (※4)
 plt.style.use('ggplot')
 df.plot(kind="line")
 plt.show()
-

@@ -8,4 +8,3 @@ model = word2vec.Word2Vec(data, size=200)
 cat_list = model.most_similar(positive="動物")
 for w in cat_list:
     print(w[0], w[1])
-

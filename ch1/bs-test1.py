@@ -1,5 +1,5 @@
 # ライブラリを取り込む --- (※1)
-from bs4 import BeautifulSoup 
+from bs4 import BeautifulSoup
 
 # 解析したいHTML --- (※2)
 html = """
@@ -22,5 +22,3 @@ p2 = p1.next_sibling.next_sibling
 print("h1 = " + h1.string)
 print("p  = " + p1.string)
 print("p  = " + p2.string)
-
-

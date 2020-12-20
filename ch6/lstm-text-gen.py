@@ -15,8 +15,8 @@ print('コーパスの長さ:', len(text))
 # 一文字ずつバラバラにして文字にIDを振る
 chars = sorted(list(set(text)))
 print('使われている文字の数:', len(chars))
-char_indices = dict((c, i) for i, c in enumerate(chars)) # 文字→ID
-indices_char = dict((i, c) for i, c in enumerate(chars)) # ID→文字
+char_indices = dict((c, i) for i, c in enumerate(chars))  # 文字→ID
+indices_char = dict((i, c) for i, c in enumerate(chars))  # ID→文字
 
 # テキストをmaxlen文字で区切って、その文の次に来る文字を記録する
 maxlen = 20
@@ -36,7 +36,6 @@ for i, sentence in enumerate(sentences):
         X[i, t, char_indices[char]] = 1
     y[i, char_indices[next_chars[i]]] = 1
 
-
 # モデルを構築する(LSTM)
 print('モデルを構築します...')
 model = Sequential()
@@ -47,6 +46,7 @@ model.add(Activation('softmax'))
 optimizer = RMSprop(lr=0.01)
 model.compile(loss='categorical_crossentropy', optimizer=optimizer)
 
+
 # 選択候補となる配列から値を取り出す
 def sample(preds, temperature=1.0):
     preds = np.asarray(preds).astype('float64')
@@ -56,12 +56,13 @@ def sample(preds, temperature=1.0):
     probas = np.random.multinomial(1, preds, 1)
     return np.argmax(probas)
 
+
 # 学習させて、テキストを生成する・・・を繰り返す
 for iteration in range(1, 60):
     print()
     print('-' * 50)
     print('繰り返し=', iteration)
-    model.fit(X, y, batch_size=128, nb_epoch=1) # 訓練
+    model.fit(X, y, batch_size=128, nb_epoch=1)  # 訓練
     # ランダムにテキストのシードを選ぶ
     start_index = random.randint(0, len(text) - maxlen - 1)
     # 多様性のパラメータごとに文を生成する
@@ -88,4 +89,3 @@ for iteration in range(1, 60):
             sys.stdout.write(next_char)
             sys.stdout.flush()
         print()
-

@@ -12,9 +12,9 @@ db.purge_table('fruits')
 table = db.table('fruits')
 
 # データをデータベースに挿入 --- (※4)
-table.insert( {'name': 'Banana', 'price': 600} )
-table.insert( {'name': 'Orange', 'price': 1200} )
-table.insert( {'name': 'Mango', 'price': 840} )
+table.insert({'name': 'Banana', 'price': 600})
+table.insert({'name': 'Orange', 'price': 1200})
+table.insert({'name': 'Mango', 'price': 840})
 
 # 全データを抽出して表示 --- (※5)
 print(table.all())
@@ -30,4 +30,3 @@ print("800円以上のもの:")
 res = table.search(Item.price >= 800)
 for it in res:
     print("-", it['name'])
-

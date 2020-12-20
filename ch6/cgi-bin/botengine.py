@@ -3,7 +3,8 @@ import os, re, json, random
 
 dict_file = "chatbot-data.json"
 dic = {}
-tokenizer = Tokenizer() # janome
+tokenizer = Tokenizer()  # janome
+
 
 # 辞書に単語を記録する --- (*1)
 def register_dic(words):
@@ -21,7 +22,8 @@ def register_dic(words):
             tmp = ["@"]
             continue
     # 辞書を更新するごとにファイルへ保存
-    json.dump(dic, open(dict_file,"w", encoding="utf-8"))
+    json.dump(dic, open(dict_file, "w", encoding="utf-8"))
+
 
 # 三要素のリストを辞書として登録
 def set_word3(dic, s3):
@@ -31,11 +33,12 @@ def set_word3(dic, s3):
     if not w3 in dic[w1][w2]: dic[w1][w2][w3] = 0
     dic[w1][w2][w3] += 1
 
+
 # 作文する --- (*2)
 def make_sentence(head):
     if not head in dic: return ""
     ret = []
-    if head != "@": ret.append(head)        
+    if head != "@": ret.append(head)
     top = dic[head]
     w1 = word_choice(top)
     w2 = word_choice(top[w1])
@@ -51,9 +54,11 @@ def make_sentence(head):
         w1, w2 = w2, w3
     return "".join(ret)
 
+
 def word_choice(sel):
     keys = sel.keys()
     return random.choice(list(keys))
+
 
 # チャットボットに返答させる --- (*3)
 def make_reply(text):
@@ -71,8 +76,7 @@ def make_reply(text):
             if face in dic: return make_sentence(face)
     return make_sentence("@")
 
+
 # 辞書があれば最初に読み込む
 if os.path.exists(dict_file):
-    dic = json.load(open(dict_file,"r"))
-
-
+    dic = json.load(open(dict_file, "r"))

@@ -1,4 +1,4 @@
-from bs4 import BeautifulSoup 
+from bs4 import BeautifulSoup
 import urllib.request as req
 
 url = "https://www.aozora.gr.jp/index_pages/person148.html"
@@ -12,4 +12,3 @@ for li in li_list:
         name = a.string
         href = a.attrs["href"]
         print(name, ">", href)
-

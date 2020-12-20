@@ -28,4 +28,3 @@ for f in files:
         with open(raw_file, "wb") as w:
             w.write(body)
 print("ok")
-

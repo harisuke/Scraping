@@ -10,8 +10,8 @@ xor_input = [
 ]
 # 入力を学習データとラベルに分ける --- (※1)
 xor_df = pd.DataFrame(xor_input)
-xor_data  = xor_df.loc[:,0:1] # データ
-xor_label = xor_df.loc[:,2]   # ラベル
+xor_data = xor_df.loc[:, 0:1]  # データ
+xor_label = xor_df.loc[:, 2]  # ラベル
 
 # データの学習と予測 --- (※2)
 clf = svm.SVC()
@@ -21,5 +21,3 @@ pre = clf.predict(xor_data)
 # 正解率を求める --- (※3)
 ac_score = metrics.accuracy_score(xor_label, pre)
 print("正解率=", ac_score)
-
-

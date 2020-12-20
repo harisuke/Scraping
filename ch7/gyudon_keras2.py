@@ -15,9 +15,10 @@ image_size = 50
 X_train, X_test, y_train, y_test = np.load("./image/gyudon2.npy")
 # データを正規化する
 X_train = X_train.astype("float") / 256
-X_test  = X_test.astype("float")  / 256
+X_test = X_test.astype("float") / 256
 y_train = np_utils.to_categorical(y_train, nb_classes)
-y_test  = np_utils.to_categorical(y_test, nb_classes)
+y_test = np_utils.to_categorical(y_test, nb_classes)
+
 
 # モデルを構築 --- (※2)
 def build_model():
@@ -31,16 +32,17 @@ def build_model():
     model.add(Conv2D(64, 3))
     model.add(MaxPool2D(pool_size=(2, 2)))
     model.add(Dropout(0.25))
-    model.add(Flatten()) 
+    model.add(Flatten())
     model.add(Dense(512))
     model.add(Activation('relu'))
     model.add(Dropout(0.5))
     model.add(Dense(nb_classes))
     model.add(Activation('softmax'))
     model.compile(loss='binary_crossentropy',
-	    optimizer='rmsprop',
-	    metrics=['accuracy'])
+                  optimizer='rmsprop',
+                  metrics=['accuracy'])
     return model
+
 
 # モデルを訓練する --- (※4)
 model = build_model()

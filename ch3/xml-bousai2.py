@@ -1,4 +1,4 @@
-from bs4 import BeautifulSoup 
+from bs4 import BeautifulSoup
 import urllib.request as req
 import os.path
 
@@ -28,4 +28,3 @@ for ward in info.keys():
     print("+", ward)
     for name in info[ward]:
         print("| - ", name)
-

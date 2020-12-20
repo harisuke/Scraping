@@ -10,7 +10,7 @@ if len(sys.argv) <= 1:
 
 image_size = 50
 categories = [
-    "普通の牛丼", "紅ショウガ牛丼", 
+    "普通の牛丼", "紅ショウガ牛丼",
     "ネギ玉牛丼", "チーズ牛丼"]
 calories = [656, 658, 768, 836]
 
@@ -46,15 +46,13 @@ for i, p in enumerate(pre):
           <p>カロリー:{3}kcal</p>
         </div>
     """.format(os.path.basename(files[i]),
-        files[i],
-        categories[y],
-        calories[y])
+               files[i],
+               categories[y],
+               calories[y])
 
 # レポートを保存 --- (※5)
 html = "<html><body style='text-align:center;'>" + \
-    "<style> p { margin:0; padding:0; } </style>" + \
-    html + "</body></html>"
+       "<style> p { margin:0; padding:0; } </style>" + \
+       html + "</body></html>"
 with open("gyudon-result.html", "w") as f:
     f.write(html)
-
-

@@ -1,5 +1,6 @@
 from sklearn import svm, metrics
 
+
 # CSVファイルを読んで学習用データに整形 --- (※1)
 def load_csv(fname):
     labels = []
@@ -11,7 +12,8 @@ def load_csv(fname):
             labels.append(int(cols.pop(0)))
             vals = list(map(lambda n: int(n) / 256, cols))
             images.append(vals)
-    return {"labels":labels, "images":images}
+    return {"labels": labels, "images": images}
+
 
 data = load_csv("./mnist/train.csv")
 test = load_csv("./mnist/t10k.csv")
@@ -29,5 +31,3 @@ cl_report = metrics.classification_report(test["labels"], predict)
 print("正解率=", ac_score)
 print("レポート=")
 print(cl_report)
-
-

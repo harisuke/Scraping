@@ -14,5 +14,3 @@ print(v)
 
 # vの平均値を求める
 print(v.mean())
-
-

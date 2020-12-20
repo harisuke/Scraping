@@ -1,4 +1,4 @@
-from bs4 import BeautifulSoup 
+from bs4 import BeautifulSoup
 
 # 解析対象となるHTML --- (※1)
 html = """
@@ -25,6 +25,4 @@ print("h1 =", h1)
 # | リスト部分を取得 --- (※4)
 li_list = soup.select("div#meigen > ul.items > li")
 for li in li_list:
-	print("li =", li.string)
-
-
+    print("li =", li.string)

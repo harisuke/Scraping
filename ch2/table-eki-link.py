@@ -1,5 +1,6 @@
 # BeautifulSoupを利用してHTMLを解析 --- (※1)
 from bs4 import BeautifulSoup
+
 html = open("eki-link.html", encoding="utf-8").read()
 soup = BeautifulSoup(html, "html.parser")
 
@@ -14,7 +15,7 @@ tr_list = table.find_all("tr")
 for tr in tr_list:
     # <td>あるいは<th>タグを得る --- (※5)
     result_row = []
-    td_list = tr.find_all(["td","th"])
+    td_list = tr.find_all(["td", "th"])
     for td in td_list:
         cell = td.get_text()
         result_row.append(cell)
@@ -23,4 +24,3 @@ for tr in tr_list:
 # リストをCSVファイルとして出力 --- (※6)
 for row in result:
     print(",".join(row))
-

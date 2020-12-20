@@ -9,23 +9,23 @@ csv["height"] = csv["height"] / 200
 csv["weight"] = csv["weight"] / 100
 # ラベルを三次元のクラスで表す --- (*3)
 # - thin=(1,0,0) / normal=(0,1,0) / fat=(0,0,1)
-bclass = {"thin": [1,0,0], "normal": [0,1,0], "fat": [0,0,1]}
-csv["label_pat"] = csv["label"].apply(lambda x : np.array(bclass[x]))
+bclass = {"thin": [1, 0, 0], "normal": [0, 1, 0], "fat": [0, 0, 1]}
+csv["label_pat"] = csv["label"].apply(lambda x: np.array(bclass[x]))
 
 # 正解率を求めるためにテストデータを準備 --- (*4)
 test_csv = csv[15000:20000]
-test_pat = test_csv[["weight","height"]]
+test_pat = test_csv[["weight", "height"]]
 test_ans = list(test_csv["label_pat"])
 
 # データフローグラフを構築する --- (*5)
 # データを入れるプレースホルダを宣言
-x  = tf.placeholder(tf.float32, [None, 2], name="x") 
-y_ = tf.placeholder(tf.float32, [None, 3], name="y_") 
+x = tf.placeholder(tf.float32, [None, 2], name="x")
+y_ = tf.placeholder(tf.float32, [None, 3], name="y_")
 
 # 変数を宣言 --- (*6)
 with tf.name_scope('interface') as scope:
-    W = tf.Variable(tf.zeros([2, 3]), name="W"); # 重み
-    b = tf.Variable(tf.zeros([3]), name="b"); # バイアス
+    W = tf.Variable(tf.zeros([2, 3]), name="W");  # 重み
+    b = tf.Variable(tf.zeros([3]), name="b");  # バイアス
     # ソフトマックス回帰を定義 --- (*7)
     with tf.name_scope('softmax') as scope:
         y = tf.nn.softmax(tf.matmul(x, W) + b)
@@ -40,18 +40,18 @@ with tf.name_scope('training') as scope:
 
 # 正解率を求める
 with tf.name_scope('accuracy') as scope:
-    predict = tf.equal(tf.argmax(y, 1), tf.argmax(y_,1))
+    predict = tf.equal(tf.argmax(y, 1), tf.argmax(y_, 1))
     accuracy = tf.reduce_mean(tf.cast(predict, tf.float32))
 
 # セッションを開始
 with tf.Session() as sess:
     tw = tf.summary.FileWriter("log_dir", graph=sess.graph)
-    sess.run(tf.global_variables_initializer()) #変数を初期化
+    sess.run(tf.global_variables_initializer())  # 変数を初期化
     # テストデータを用いて学習させる
     for step in range(3500):
         i = (step * 100) % 14000
-        rows = csv[1 + i : 1 + i + 100]
-        x_pat = rows[["weight","height"]]
+        rows = csv[1 + i: 1 + i + 100]
+        x_pat = rows[["weight", "height"]]
         y_ans = list(rows["label_pat"])
         fd = {x: x_pat, y_: y_ans}
         sess.run(train, feed_dict=fd)
@@ -63,4 +63,3 @@ with tf.Session() as sess:
     # 最終的な正解率を求める
     acc = sess.run(accuracy, feed_dict={x: test_pat, y_: test_ans})
     print("正解率=", acc)
-            

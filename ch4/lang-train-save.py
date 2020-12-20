@@ -1,4 +1,4 @@
-from sklearn import svm 
+from sklearn import svm
 from sklearn.externals import joblib
 import json
 
@@ -14,4 +14,3 @@ clf.fit(data["freqs"], data["labels"])
 # 学習データを保存する
 joblib.dump(clf, "./cgi-bin/freq.pkl")
 print("ok")
-

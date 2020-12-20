@@ -18,4 +18,3 @@ for a in links:
     result.append((title, href))
 
 print(result)
-

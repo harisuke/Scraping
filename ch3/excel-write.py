@@ -1,4 +1,4 @@
-import openpyxl 
+import openpyxl
 
 # Excelファイルを開く --- (※1)
 filename = "population.xlsx"
@@ -10,7 +10,7 @@ sheet = book.active
 # 人口のトータルを計算する --- (※3)
 total = 0
 for i, row in enumerate(sheet.rows):
-    if i == 0: continue # 先頭はヘッダ
+    if i == 0: continue  # 先頭はヘッダ
     po = int(row[2].value)
     total += po
 print("total=", total)
@@ -28,4 +28,3 @@ c.number_format = sheet['C48'].number_format
 filename = "population-total.xlsx"
 book.save(filename)
 print("ok")
-

@@ -2,9 +2,10 @@ def ngram(s, num):
     res = []
     slen = len(s) - num + 1
     for i in range(slen):
-        ss = s[i:i+num]
+        ss = s[i:i + num]
         res.append(ss)
     return res
+
 
 def diff_ngram(sa, sb, num):
     a = ngram(sa, num)
@@ -25,7 +26,5 @@ b = "渋谷で食べた今日のトンカツは美味しかった。"
 r2, word2 = diff_ngram(a, b, 2)
 print("2-gram:", r2, word2)
 # 3-gram
-r3, word3  = diff_ngram(a, b, 3)
+r3, word3 = diff_ngram(a, b, 3)
 print("3-gram:", r3, word3)
-
-

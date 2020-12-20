@@ -46,5 +46,3 @@ for a in links:
     href = a.get_attribute('href')
     title = a.text
     print("-", title, ">", href)
-
-

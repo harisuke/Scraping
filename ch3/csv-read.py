@@ -15,4 +15,3 @@ for row in rows:
 # 変換結果を表示
 for c in data:
     print(c[1], c[2])
-

@@ -10,12 +10,14 @@ nb_classes = len(categories)
 image_size = 50
 
 # 画像データを読み込む --- (※1)
-X = [] # 画像データ
-Y = [] # ラベルデータ
+X = []  # 画像データ
+Y = []  # ラベルデータ
+
+
 def add_sample(cat, fname, is_train):
     img = Image.open(fname)
-    img = img.convert("RGB") # カラーモードの変更
-    img = img.resize((image_size, image_size)) # 画像サイズの変更
+    img = img.convert("RGB")  # カラーモードの変更
+    img = img.resize((image_size, image_size))  # 画像サイズの変更
     data = np.asarray(img)
     X.append(data)
     Y.append(cat)
@@ -34,12 +36,15 @@ def add_sample(cat, fname, is_train):
         X.append(data)
         Y.append(cat)
 
+
 def make_sample(files, is_train):
     global X, Y
-    X = []; Y = []
+    X = [];
+    Y = []
     for cat, fname in files:
         add_sample(cat, fname, is_train)
     return np.array(X), np.array(Y)
+
 
 # ディレクトリごとに分けられたファイルを収集する --- (※2)
 allfiles = []
@@ -53,13 +58,9 @@ for idx, cat in enumerate(categories):
 random.shuffle(allfiles)
 th = math.floor(len(allfiles) * 0.6)
 train = allfiles[0:th]
-test  = allfiles[th:]
+test = allfiles[th:]
 X_train, y_train = make_sample(train, True)
 X_test, y_test = make_sample(test, False)
 xy = (X_train, X_test, y_train, y_test)
 np.save("./image/gyudon2.npy", xy)
 print("ok,", len(y_train))
-
-
-
-

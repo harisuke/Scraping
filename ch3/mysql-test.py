@@ -22,7 +22,7 @@ cur.execute('''
     ''')
 
 # データを挿入する --- (※5)
-data = [('Banana', 300),('Mango', 640), ('Kiwi', 280)]
+data = [('Banana', 300), ('Mango', 640), ('Kiwi', 280)]
 for i in data:
     cur.execute("INSERT INTO items(name,price) VALUES(%s,%s)", i)
 
@@ -30,4 +30,3 @@ for i in data:
 cur.execute("SELECT * FROM items")
 for row in cur.fetchall():
     print(row)
-

@@ -1,13 +1,14 @@
 import scrapy, pprint
 
+
 class Soseki4Spider(scrapy.Spider):
     name = 'soseki4'
     allowed_domains = ['www.aozora.gr.jp']
     # 夏目漱石の作品一覧ページ
     start_urls = [
-      'https://www.aozora.gr.jp/index_pages/person148.html'
+        'https://www.aozora.gr.jp/index_pages/person148.html'
     ]
-    
+
     # 作品一覧ページの解析
     def parse(self, response):
         li_list = response.css('ol > li a')
@@ -30,11 +31,11 @@ class Soseki4Spider(scrapy.Spider):
             if href2[-4:] != ".zip": continue
             # ダウンロードを指示する --- (※1)
             req = scrapy.Request(
-              href2, callback=self.parse_item)
+                href2, callback=self.parse_item)
             # メタデータにタイトルを指定 --- (※2)
             req.meta["title"] = title
             yield req
-    
+
     # ZIPファイルの保存 --- (※3)
     def parse_item(self, response):
         # メタ情報よりファイル名を決定 --- (※4)
@@ -43,5 +44,4 @@ class Soseki4Spider(scrapy.Spider):
         fname = title + '.zip'
         # ファイルを保存 --- (※5)
         with open(fname, "wb") as f:
-          f.write(response.body)
-    
+            f.write(response.body)

@@ -14,4 +14,3 @@ ken = soup.find("ken").string
 shi = soup.find("shi").string
 cho = soup.find("cho").string
 print(ken, shi, cho)
-

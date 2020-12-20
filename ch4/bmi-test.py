@@ -8,8 +8,8 @@ tbl = pd.read_csv("bmi.csv")
 
 # カラム(列)をスライスして正規化 --- (※2)
 label = tbl["label"]
-w = tbl["weight"] / 100 # 最大100kgと考える
-h = tbl["height"] / 200 # 最長200cmと考える
+w = tbl["weight"] / 100  # 最大100kgと考える
+h = tbl["height"] / 200  # 最長200cmと考える
 wh = pd.concat([w, h], axis=1)
 
 # 学習用とテスト用データに分ける --- (※3)
@@ -28,4 +28,3 @@ ac_score = metrics.accuracy_score(label_test, predict)
 cl_report = metrics.classification_report(label_test, predict)
 print("正解率=", ac_score)
 print("レポート=\n", cl_report)
-

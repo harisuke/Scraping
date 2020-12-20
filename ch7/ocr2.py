@@ -11,14 +11,13 @@ thresh = cv2.adaptiveThreshold(blur, 255, 1, 1, 11, 2)
 
 # 輪郭を抽出 --- (※1)
 contours = cv2.findContours(
-    thresh,      
-    cv2.RETR_EXTERNAL, 
+    thresh,
+    cv2.RETR_EXTERNAL,
     cv2.CHAIN_APPROX_SIMPLE)[0]
 
 # 抽出した領域を繰り返し処理する 
 for cnt in contours:
-    x, y, w, h = cv2.boundingRect(cnt) # --- (※5)
-    if h < 10: continue # 小さすぎるのは飛ばす
-    cv2.rectangle(im, (x, y), (x+w, y+h), (0,0,255), 2)
+    x, y, w, h = cv2.boundingRect(cnt)  # --- (※5)
+    if h < 10: continue  # 小さすぎるのは飛ばす
+    cv2.rectangle(im, (x, y), (x + w, y + h), (0, 0, 255), 2)
 cv2.imwrite('numbers100-cnt2.png', im)
-

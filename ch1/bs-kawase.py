@@ -11,4 +11,3 @@ soup = BeautifulSoup(res, "html.parser")
 # 任意のデータを抽出 --- (※1)
 jpy = soup.select_one("jpy").string
 print("usd/jpy=", jpy)
-

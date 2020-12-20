@@ -16,4 +16,3 @@ browser.get(url)
 browser.save_screenshot("website.png")
 # ブラウザを終了 --- (※5)
 browser.quit()
-

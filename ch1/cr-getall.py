@@ -9,11 +9,12 @@ import os.path, time, re
 # 処理済み判断変数 --- (※2)
 proc_files = {}
 
+
 # HTML内にあるリンクを抽出する関数 --- (※3)
 def enum_links(html, base):
     soup = BeautifulSoup(html, "html.parser")
-    links = soup.select("link[rel='stylesheet']") # CSS
-    links += soup.select("a[href]") # リンク
+    links = soup.select("link[rel='stylesheet']")  # CSS
+    links += soup.select("a[href]")  # リンク
     result = []
     # href属性を取り出し、リンクを絶対パスに変換 --- (※4)
     for a in links:
@@ -22,11 +23,12 @@ def enum_links(html, base):
         result.append(url)
     return result
 
+
 # ファイルをダウンロードし保存する関数 --- (※5)
 def download_file(url):
     o = urlparse(url)
     savepath = "./" + o.netloc + o.path
-    if re.search(r"/$", savepath): # ディレクトリならindex.html
+    if re.search(r"/$", savepath):  # ディレクトリならindex.html
         savepath += "index.html"
     savedir = os.path.dirname(savepath)
     # 既にダウンロード済み?
@@ -39,17 +41,19 @@ def download_file(url):
     try:
         print("download=", url)
         urlretrieve(url, savepath)
-        time.sleep(1) # 礼儀として1秒スリープ --- (※7)
+        time.sleep(1)  # 礼儀として1秒スリープ --- (※7)
         return savepath
     except:
         print("ダウンロード失敗:", url)
-        return None        
+        return None
 
-# HTMLを解析してダウンロードする関数 --- (※8)
+    # HTMLを解析してダウンロードする関数 --- (※8)
+
+
 def analize_html(url, root_url):
     savepath = download_file(url)
     if savepath is None: return
-    if savepath in proc_files: return # 解析済みなら処理しない --- (※9)
+    if savepath in proc_files: return  # 解析済みなら処理しない --- (※9)
     proc_files[savepath] = True
     print("analize_html=", url)
     # リンクを抽出 --- (※10)
@@ -67,10 +71,8 @@ def analize_html(url, root_url):
         # それ以外のファイル
         download_file(link_url)
 
+
 if __name__ == "__main__":
     # URLを丸ごとダウンロード --- (※13)
     url = "https://docs.python.jp/3.6/library/"
     analize_html(url, url)
-
-
-

@@ -12,29 +12,30 @@ from keras.utils import np_utils
 from sklearn.cross_validation import train_test_split
 from sklearn import cross_validation, metrics
 
-import os,re,glob,json
+import os, re, glob, json
 import numpy as np
 import pandas as pd
 
-max_words = 67395 # 入力単語数
-nb_classes = 9    # 9カテゴリを分類
+max_words = 67395  # 入力単語数
+nb_classes = 9  # 9カテゴリを分類
 
 batch_size = 32
 nb_epoch = 5
 
 max_features = 200
-embedding_dims = 40 
+embedding_dims = 40
 nb_filter = 20
 filter_length = 64
 hidden_dims = 50
+
 
 # CNNのモデルを生成
 def build_model():
     model = Sequential()
     model.add(Embedding(max_features,
-        embedding_dims,
-        input_length=max_words,
-        dropout=0.2))
+                        embedding_dims,
+                        input_length=max_words,
+                        dropout=0.2))
     model.add(Convolution1D(
         nb_filter=nb_filter,
         filter_length=filter_length,
@@ -50,15 +51,16 @@ def build_model():
     model.add(Dense(nb_classes))
     model.add(Activation('softmax'))
     model.compile(loss='binary_crossentropy',
-        optimizer='adam',
-        metrics=['accuracy'])
+                  optimizer='adam',
+                  metrics=['accuracy'])
     print(model.summary())
     return model
 
+
 # モデルを生成
 model = KerasClassifier(
-    build_fn=build_model, 
-    nb_epoch=nb_epoch, 
+    build_fn=build_model,
+    nb_epoch=nb_epoch,
     batch_size=batch_size)
 
 # テストデータを読み込み
@@ -67,7 +69,7 @@ X = data["X"]
 Y = data["Y"]
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y)
 Y_train = np_utils.to_categorical(Y_train, nb_classes)
-print(len(X_train),len(Y_train))
+print(len(X_train), len(Y_train))
 
 # 学習
 model.fit(X_train, Y_train, verbose=1)
@@ -78,5 +80,3 @@ ac_score = metrics.accuracy_score(Y_test, y)
 cl_report = metrics.classification_report(Y_test, y)
 print("正解率=", ac_score)
 print("レポート=\n", cl_report)
-
-

@@ -22,4 +22,3 @@ data = yaml.load(yaml_str)
 print("title=", data["color"]["title"])
 print("body=", data["color"]["body"])
 print("link=", data["color"]["link"])
-

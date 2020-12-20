@@ -1,33 +1,40 @@
 import tensorflow as tf
-from tensorflow.examples.tutorials.mnist import input_data 
+from tensorflow.examples.tutorials.mnist import input_data
 
 # MINSTの手書き画像データを読み込む --- (*1)
 mnist = input_data.read_data_sets("mnist/", one_hot=True)
 
-pixels = 28 * 28 # 28x28ピクセル
-nums = 10 # 0-9の10クラスに分ける
+pixels = 28 * 28  # 28x28ピクセル
+nums = 10  # 0-9の10クラスに分ける
 
 # プレースホルダを定義 --- (*2)
-x  = tf.placeholder(tf.float32, shape=(None, pixels), name="x") # 画像データ
+x = tf.placeholder(tf.float32, shape=(None, pixels), name="x")  # 画像データ
 y_ = tf.placeholder(tf.float32, shape=(None, nums), name="y_")  # 正解ラベル 
+
 
 # 重みとバイアスを初期化する関数 --- (*3)
 def weight_variable(name, shape):
     W_init = tf.truncated_normal(shape, stddev=0.1)
-    W = tf.Variable(W_init, name="W_"+name)
+    W = tf.Variable(W_init, name="W_" + name)
     return W
+
+
 def bias_variable(name, size):
     b_init = tf.constant(0.1, shape=[size])
-    b = tf.Variable(b_init, name="b_"+name)
+    b = tf.Variable(b_init, name="b_" + name)
     return b
+
 
 # 畳み込みを行う関数 --- (*4)
 def conv2d(x, W):
-    return tf.nn.conv2d(x, W, strides=[1,1,1,1], padding='SAME')
+    return tf.nn.conv2d(x, W, strides=[1, 1, 1, 1], padding='SAME')
+
+
 # 最大プーリングを行う関数 --- (*5)
 def max_pool(x):
-    return tf.nn.max_pool(x, ksize=[1,2,2,1],
-        strides=[1,2,2,1], padding='SAME')
+    return tf.nn.max_pool(x, ksize=[1, 2, 2, 1],
+                          strides=[1, 2, 2, 1], padding='SAME')
+
 
 # 畳み込み層1 --- (*6)
 with tf.name_scope('conv1') as scope:
@@ -56,7 +63,7 @@ with tf.name_scope('fully_connected') as scope:
     W_fc = weight_variable('fc', [n, 1024])
     b_fc = bias_variable('fc', 1024)
     h_pool2_flat = tf.reshape(h_pool2, [-1, n])
-    h_fc = tf.nn.relu(tf.matmul(h_pool2_flat, W_fc) + b_fc)        
+    h_fc = tf.nn.relu(tf.matmul(h_pool2_flat, W_fc) + b_fc)
 
 # ドロップアウト(過剰適合)を排除 --- (*11)
 with tf.name_scope('dropout') as scope:
@@ -81,9 +88,11 @@ with tf.name_scope('predict') as scope:
     predict_step = tf.equal(tf.argmax(y_conv, 1), tf.argmax(y_, 1))
     accuracy_step = tf.reduce_mean(tf.cast(predict_step, tf.float32))
 
+
 # feed_dictの設定 --- (*15)
 def set_feed(images, labels, prob):
     return {x: images, y_: labels, keep_prob: prob}
+
 
 # セッションを開始 --- (*16)
 with tf.Session() as sess:
@@ -103,7 +112,3 @@ with tf.Session() as sess:
     # 最終結果を表示
     acc = sess.run(accuracy_step, feed_dict=test_fd)
     print("正解率=", acc)
-
-
-
-

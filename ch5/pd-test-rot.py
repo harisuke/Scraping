@@ -1,4 +1,5 @@
 import pandas as pd
+
 tbl = pd.DataFrame([
     ["A", "B", "C"],
     ["D", "E", "F"],
@@ -7,4 +8,3 @@ tbl = pd.DataFrame([
 print(tbl)
 print("---")
 print(tbl.T)
-

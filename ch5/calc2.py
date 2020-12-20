@@ -12,7 +12,7 @@ calc2_op = (a + b) * c
 
 # セッションを開始する --- (※4)
 sess = tf.Session()
-res1 = sess.run(calc1_op) # 式を評価する
+res1 = sess.run(calc1_op)  # 式を評価する
 print(res1)
-res2 = sess.run(calc2_op) # 式を評価する
+res2 = sess.run(calc2_op)  # 式を評価する
 print(res2)

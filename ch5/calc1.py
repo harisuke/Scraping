@@ -10,6 +10,5 @@ add_op = a + b
 
 # セッションを開始する --- (※4)
 sess = tf.Session()
-res = sess.run(add_op) # 式を評価する
+res = sess.run(add_op)  # 式を評価する
 print(res)
-

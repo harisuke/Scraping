@@ -5,11 +5,11 @@ import numpy as np
 
 # 分類対象のカテゴリを選ぶ --- (※1)
 caltech_dir = "./image/101_ObjectCategories"
-categories = ["chair","camera","butterfly","elephant","flamingo"]
+categories = ["chair", "camera", "butterfly", "elephant", "flamingo"]
 nb_classes = len(categories)
 
 # 画像サイズを指定 --- (※2)
-image_w = 64 
+image_w = 64
 image_h = 64
 pixels = image_w * image_h * 3
 
@@ -22,9 +22,9 @@ for idx, cat in enumerate(categories):
     label[idx] = 1
     # 画像 --- (※5)
     image_dir = caltech_dir + "/" + cat
-    files = glob.glob(image_dir+"/*.jpg")
+    files = glob.glob(image_dir + "/*.jpg")
     for i, f in enumerate(files):
-        img = Image.open(f) # --- (※6)
+        img = Image.open(f)  # --- (※6)
         img = img.convert("RGB")
         img = img.resize((image_w, image_h))
         data = np.asarray(img)

@@ -7,6 +7,7 @@ import json
 PHOTOZOU_API = "https://api.photozou.jp/rest/search_public.json"
 CACHE_DIR = "./image/cache"
 
+
 # フォト蔵のAPIを利用して画像を検索する --- (※1)
 def search_photo(keyword, offset=0, limit=100):
     # APIのクエリを組み立てる
@@ -22,8 +23,9 @@ def search_photo(keyword, offset=0, limit=100):
         return json.load(open(cache, "r", encoding="utf-8"))
     print("[API] " + url)
     req.urlretrieve(url, cache)
-    time.sleep(1) # --- 礼儀として1秒スリープ
+    time.sleep(1)  # --- 礼儀として1秒スリープ
     return json.load(open(cache, "r", encoding="utf-8"))
+
 
 # 画像をダウンロードする --- (※2)
 def download_thumb(info, save_dir):
@@ -42,21 +44,24 @@ def download_thumb(info, save_dir):
         try:
             print("[download]", title, photo_id)
             req.urlretrieve(url, path)
-            time.sleep(1) # --- 礼儀として1秒スリープ
+            time.sleep(1)  # --- 礼儀として1秒スリープ
         except Exception as e:
             print("[ERROR] failed to downlaod url=", url)
 
+
 # 検索結果を全部取得する --- (※3)
-def download_all(keyword, save_dir, maxphoto = 1000):
+def download_all(keyword, save_dir, maxphoto=1000):
     offset = 0
     limit = 100
     while True:
         # APIを呼び出す
         info = search_photo(keyword, offset=offset, limit=limit)
         if info is None:
-            print("[ERROR] no result"); return
+            print("[ERROR] no result");
+            return
         if (not "info" in info) or (not "photo_num" in info["info"]):
-            print("[ERROR] broken data"); return
+            print("[ERROR] broken data");
+            return
         photo_num = info["info"]["photo_num"]
         if photo_num == 0:
             print("photo_num = 0, offset=", offset)
@@ -67,8 +72,7 @@ def download_all(keyword, save_dir, maxphoto = 1000):
         offset += limit
         if offset >= maxphoto: break
 
+
 if __name__ == '__main__':
     # モジュールとして使わないで単独で実行する時    
-    download_all("牛丼", "./image/gyudon") # --- (※4)
-
-
+    download_all("牛丼", "./image/gyudon")  # --- (※4)

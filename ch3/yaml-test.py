@@ -27,4 +27,3 @@ data = yaml.load(yaml_str)
 # 名前と値段だけ表示する --- (※3)
 for item in data['PriceList']:
     print(item["name"], item["price"])
-

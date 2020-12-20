@@ -1,13 +1,14 @@
 import scrapy
 
+
 class Soseki3Spider(scrapy.Spider):
     name = 'soseki3'
     allowed_domains = ['www.aozora.gr.jp']
     # 夏目漱石の作品一覧ページ --- (※1)
     start_urls = [
-      'https://www.aozora.gr.jp/index_pages/person148.html'
+        'https://www.aozora.gr.jp/index_pages/person148.html'
     ]
-    
+
     # 作品一覧ページの解析 --- (※2)
     def parse(self, response):
         li_list = response.css('ol > li a')
@@ -36,4 +37,3 @@ class Soseki3Spider(scrapy.Spider):
                 'title': title,
                 'url': href2
             }
-    

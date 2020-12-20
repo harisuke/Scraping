@@ -1,4 +1,4 @@
-from bs4 import BeautifulSoup 
+from bs4 import BeautifulSoup
 
 html = """
 <html><body>
@@ -12,9 +12,8 @@ soup = BeautifulSoup(html, 'html.parser')
 
 # find()メソッドで取り出す --- (※2)
 title = soup.find(id="title")
-body  = soup.find(id="body")
+body = soup.find(id="body")
 
 # テキスト部分を表示 
 print("#title=" + title.string)
-print("#body="  + body.string)
-
+print("#body=" + body.string)

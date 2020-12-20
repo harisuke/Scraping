@@ -17,5 +17,3 @@ data = json.load(open(savename, "r", encoding="utf-8"))
 # ランダムに一首表示 --- (※3)
 r = random.choice(data)
 print(r['kami'], r['simo'])
-
-

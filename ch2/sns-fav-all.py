@@ -6,7 +6,7 @@ import time
 
 USER = "JS-TESTER"
 PASS = "ipCU12ySxI"
-FAV_USER_ID = 32 # お気に入りをつけるユーザーのID
+FAV_USER_ID = 32  # お気に入りをつけるユーザーのID
 SNS_URL = "https://uta.pw/sakusibbs/"
 
 # Firefoxのドライバを得る --- (※1)
@@ -17,6 +17,7 @@ browser = Firefox(options=options)
 # ログインする --- (※2)
 url_login = SNS_URL + "users.php?action=login"
 browser.get(url_login)
+
 
 # テキストボックスに文字を入力してフォーム送信する関数
 def form_post(frm, d):
@@ -30,12 +31,13 @@ def form_post(frm, d):
         EC.presence_of_element_located(
             (By.CSS_SELECTOR, ".islogin")))
 
+
 # 対象となるフォームを指定
 frm = browser.find_element_by_css_selector("#loginForm form")
 # テキストボックスにデータを指定して送信する
 form_post(frm, {
-    "username_mmlbbs6":USER, 
-    "password_mmlbbs6":PASS} )
+    "username_mmlbbs6": USER,
+    "password_mmlbbs6": PASS})
 
 # 本当にログインしたか画像で確認してみる --- (※3)
 browser.save_screenshot("sns-logined.png")
@@ -80,5 +82,3 @@ for href, title in sakuhin_list:
         print("| 既にお気に入りでした.")
     # 負荷軽減
     time.sleep(1)
-
-

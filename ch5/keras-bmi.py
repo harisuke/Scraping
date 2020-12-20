@@ -8,16 +8,15 @@ csv = pd.read_csv("bmi.csv")
 # 体重と身長のデータ
 csv["weight"] /= 100
 csv["height"] /= 200
-X = csv[["weight", "height"]] # --- (※1a)
+X = csv[["weight", "height"]]  # --- (※1a)
 # ラベル
-bclass = {"thin":[1,0,0], "normal":[0,1,0], "fat":[0,0,1]}
-y = np.empty((20000,3))
+bclass = {"thin": [1, 0, 0], "normal": [0, 1, 0], "fat": [0, 0, 1]}
+y = np.empty((20000, 3))
 for i, v in enumerate(csv["label"]):
     y[i] = bclass[v]
 # 訓練データとテストデータを分ける --- (※2)
 X_train, y_train = X[1:15001], y[1:15001]
-X_test,  y_test  = X[15001:20001], y[15001:20001] 
-
+X_test, y_test = X[15001:20001], y[15001:20001]
 
 # モデルの構造を定義 --- (※3)
 model = Sequential()
@@ -51,4 +50,3 @@ hist = model.fit(
 score = model.evaluate(X_test, y_test)
 print('loss=', score[0])
 print('accuracy=', score[1])
-
