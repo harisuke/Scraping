@@ -8,4 +8,5 @@
 
 - [書籍の修正点](https://kujirahand.com/blog/go.php?740)
 
-- brother
+- brother 
+- gg
