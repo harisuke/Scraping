@@ -13,7 +13,7 @@ address_list=req.text.split('"' )
 count=-1
 for i in address_list:
     count+=1
-    postcode = re.match('http' , i)
+    postcode = re.match('http',i)
     if postcode:
         print(address_list[count])
 #    else:
