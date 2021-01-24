@@ -8,13 +8,14 @@ req = requests.get(url, params={'q': 'パイソン'})
 
 
 
-address_list=req.text.split('"' )
-
+html_list=req.text.split('"' )
+address_list=[]
 count=-1
-for i in address_list:
+for i in html_list:
     count+=1
     postcode = re.match('http',i)
     if postcode:
-        print(address_list[count])
+        print(html_list[count])
+        address_list.append(html_list[count])
 #    else:
 #        print ("失敗")
