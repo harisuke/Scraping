@@ -20,7 +20,6 @@ def split_html(html_list,split_word):
             count += 1
             postcode = re.match('https', j)
             if postcode:
-
                 address_list.append(kari_list[count])
     return address_list
 
